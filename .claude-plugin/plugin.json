@@ -1,0 +1,10 @@
+{
+  "name": "auditing-agent-config",
+  "version": "1.0.0",
+  "description": "Audits a Claude setup for redundant, misplaced, unused, and conflicting skills, plugins, CLAUDE.md files, hooks, and MCP servers. Read-only by default.",
+  "author": { "name": "Keshav Joglekar" },
+  "homepage": "https://github.com/keshavjoglekar/auditing-agent-config",
+  "repository": "https://github.com/keshavjoglekar/auditing-agent-config",
+  "license": "MIT",
+  "keywords": ["audit", "configuration", "skills", "plugins", "maintenance"]
+}

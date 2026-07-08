@@ -1,0 +1,22 @@
+{
+  "name": "auditing-agent-config",
+  "owner": {
+    "name": "Keshav Joglekar",
+    "url": "https://github.com/keshavjoglekar"
+  },
+  "metadata": {
+    "description": "Audit your Claude configuration for drift.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "auditing-agent-config",
+      "description": "Audits a Claude setup for redundant, misplaced, unused, and conflicting skills, plugins, CLAUDE.md files, hooks, and MCP servers. Read-only by default.",
+      "version": "1.0.0",
+      "author": { "name": "Keshav Joglekar" },
+      "source": "./",
+      "category": "utilities",
+      "tags": ["audit", "configuration", "skills", "plugins", "maintenance"]
+    }
+  ]
+}
