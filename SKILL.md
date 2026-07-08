@@ -21,11 +21,11 @@ Ask briefly (reasonable defaults are fine, don't block on every question):
 
 **Environment check — do this before gathering.** If you (Claude) are running in a sandboxed environment without access to the user's real home directory (e.g. a claude.ai conversation with a container bash tool, rather than Claude Code on their machine), you cannot see their actual `~/.claude`. Say so plainly and ask the user to paste the command output from Step 2 — do NOT silently audit the sandbox's own skill library as if it were theirs. This is a real failure mode: the sandbox may share plugin *names* with the user's setup without sharing the actual inventory.
 
-## Step 2: Gather — and reconcile three separate sources of truth
+## Step 2: Gather — and reconcile your separate sources of truth
 
-**This is the step that most needs care.** There is no single list of "your skills." What you see injected into a session is NOT the same as what's installed, and neither is the same as what's on disk. Recommending removal from the wrong list is the classic failure of this audit — you will confidently tell someone to delete things that aren't where you think they are. So gather all three inventories and reconcile them before analyzing.
+**This is the step that most needs care.** There is no single list of "your skills." What you see injected into a session is NOT the same as what's installed, and neither is the same as what's on disk. Recommending removal from the wrong list is the classic failure of this audit — you will confidently tell someone to delete things that aren't where you think they are. So gather every inventory and reconcile them before analyzing.
 
-The three sources of truth:
+The sources of truth:
 
 | Inventory | Authoritative source | What it contains |
 |---|---|---|
@@ -74,7 +74,7 @@ Interactive commands that show what's *actually* loaded (ask the user to run and
 
 ## Step 3: Analyze
 
-Go through each check. Skip what doesn't exist. For every removal/change you propose, you must be able to say which of the three inventories the item lives in and how it's removed (see the layer model in Step 4).
+Go through each check. Skip what doesn't exist. For every removal/change you propose, you must be able to say which inventory the item lives in and how it's removed (see the layer model in Step 4).
 
 ### 3a. Duplicate or shadowing skills
 Same name or near-identical purpose in more than one place. Watch specifically for a name that appears both as a plugin-injected skill and as something that looks local — that's usually one skill seen through two lenses, not a true duplicate. Precedence to know: project shadows global on name collision; a skill beats a command of the same name; plugin skills are namespaced to avoid collision.
