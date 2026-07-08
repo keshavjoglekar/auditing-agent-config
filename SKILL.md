@@ -50,9 +50,22 @@ find ~/.claude/agents -type f 2>/dev/null
 find ~/.claude/commands -type f 2>/dev/null
 cat ~/.claude/settings.json 2>/dev/null
 
-# App state, plugin enable-flags, MCP servers, AND usage telemetry (see Step 3f)
-# Read by structure/keys only — never print token or apiKey values.
-cat ~/.claude.json 2>/dev/null | head -c 4000
+# App state, plugin enable-flags, MCP servers, AND usage telemetry (see Step 3f).
+# Extract only the keys we need. This never prints token/apiKey values, and —
+# unlike a byte-truncation — it reaches skillUsage/pluginUsage, which sit near
+# the END of a large ~/.claude.json (often past byte ~38k). Do NOT swap this for
+# `head -c N`: that silently cuts off the very telemetry Step 3f depends on.
+jq '{numStartups, skillUsage, pluginUsage, mcpServers: (.mcpServers // {} | keys)}' \
+  ~/.claude.json 2>/dev/null
+# Per-project enabled plugins + MCP servers (only projects that actually set them):
+jq -r '.projects | to_entries[]
+       | select((.value.enabledPlugins // {} | length > 0)
+                or (.value.mcpServers // {} | length > 0))
+       | {project: .key, enabledPlugins: .value.enabledPlugins,
+          mcpServers: (.value.mcpServers // {} | keys)}' \
+  ~/.claude.json 2>/dev/null
+# No jq? Same extraction in Python:
+#   python3 -c 'import json,os;d=json.load(open(os.path.expanduser("~/.claude.json")));import sys;print({k:d.get(k) for k in ("numStartups","skillUsage","pluginUsage")})'
 
 # Project scope (from the project root)
 cat CLAUDE.md 2>/dev/null || cat .claude/CLAUDE.md 2>/dev/null
