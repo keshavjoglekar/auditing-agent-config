@@ -27,7 +27,7 @@ npx skills add keshavjoglekar/auditing-agent-config -g
 
 ### Claude desktop app / claude.ai
 
-Download [`auditing-agent-config.zip`](auditing-agent-config.zip), then Settings → Capabilities → Skills → upload.
+Download [`auditing-agent-config.zip`](https://github.com/keshavjoglekar/auditing-agent-config/releases/latest/download/auditing-agent-config.zip), then Settings → Capabilities → Skills → upload.
 
 ### Manual
 
